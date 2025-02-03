@@ -1,3 +1,6 @@
+import { Button } from "@heroui/react";
+import { Link } from "react-router-dom";
+
 function PageNotFound() {
   return (
     <div className="flex items-center justify-center bg-gradient-to-r from-bgColorPrimary to-bgColorSecondary relative h-screen w-screen overflow-hidden">
@@ -14,7 +17,24 @@ function PageNotFound() {
         </p>
 
         <div className="flex justify-center items-center mt-4 space-x-4">
-          {/* Aqui você pode adicionar botões ou links */}
+          <Link to="/">
+            <Button
+              className="text-white"
+              color="success"
+              variant="shadow"
+              size="lg"
+            >
+              Página Principal
+            </Button>
+          </Link>
+          <Button
+            className="text-white"
+            color="danger"
+            variant="shadow"
+            size="lg"
+          >
+            Contate o Suporte
+          </Button>
         </div>
       </div>
     </div>

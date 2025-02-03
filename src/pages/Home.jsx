@@ -1,3 +1,6 @@
+import { Button } from "@heroui/react";
+import { Link } from "react-router-dom";
+
 function Home() {
   return (
     <section className="flex items-center justify-center bg-gradient-to-r from-bgColorPrimary to-bgColorSecondary relative h-screen w-screen overflow-hidden">
@@ -9,7 +12,19 @@ function Home() {
           MyFinance
         </h1>
         <div className="flex justify-center items-center mt-4 space-x-4">
-          {/* Aqui você pode adicionar botões ou outros elementos */}
+        <Link to="/signin">  
+        <Button color="primary" variant="shadow" size="lg">
+        Cadastrar-Se 
+      </Button>
+      </Link>
+      <Button 
+      className="text-white"
+      color="success" 
+      variant="shadow" 
+      size="lg"
+      >
+        Login 
+      </Button>
         </div>
       </div>
       <div className="absolute top-0 left-0 h-full w-1/3 rounded-r-lg overflow-hidden shadow-lg shadow-shadowPrimary">

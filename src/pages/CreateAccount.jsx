@@ -1,3 +1,4 @@
+import { Button, Input } from "@heroui/react";
 
 function CreateAccount() {
   return (
@@ -24,39 +25,73 @@ function CreateAccount() {
 
             <form action="#" className="mt-8 grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
-                {/* <Field>
-                  <label className="text-white" htmlFor="firtName">Nome</label>
-                  <Input type="text" id="firstName" name="firstName"/>
-                </Field> */}
-
+                <label className="text-white mb-5" htmlFor="Nome">
+                  Nome
+                </label>
+                <Input
+                  isRequired
+                  id="name"
+                  errorMessage="Por favor, preencha o campo Nome"
+                  name="name"
+                  placeholder="Digite seu nome"
+                  type="text"
+                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
-                {/* <Field>
-                  <label className="text-white" htmlFor="cpf">CPF</label>
-                  <Input type="text" id="cpf" name="cpf" />
-                </Field> */}
+                <label className="text-white" htmlFor="cpf">
+                  CPF
+                </label>
+                <Input
+                  isRequired
+                  id="cpf"
+                  errorMessage="Por favor, preencha o campo CPF"
+                  name="cpf"
+                  placeholder="Digite seu CPF"
+                  type="text"
+                />
               </div>
 
               <div className="col-span-6">
-                {/* <Field>
-                  <label className="text-white" htmlFor="email">Email</label>
-                  <Input type="email" id="email" name="email" />
-                </Field> */}
+                <label className="text-white" htmlFor="email">
+                  Email
+                </label>
+                <Input
+                  isRequired
+                  id="email"
+                  errorMessage="Por favor, preencha o campo Email"
+                  name="email"
+                  placeholder="Digite seu email"
+                  type="email"
+                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
-                {/* <Field>
-                  <label className="text-white" htmlFor="password">Senha</label>
-                <Input type="password" id="password" name="password" />
-                </Field> */}
+                <label className="text-white" htmlFor="password">
+                  Senha
+                </label>
+                <Input
+                  isRequired
+                  id="password"
+                  errorMessage="Por favor, preencha o campo Senha"
+                  name="password"
+                  placeholder="Digite sua senha"
+                  type="password"
+                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
-                {/* <Field>
-                  <label className="text-white" htmlFor="confirmPassword">Confirme Sua Senha</label>
-                  <Input type="password" id="passwordConfirmation" name="passwordConfirmation" />
-                </Field> */}
+                <label className="text-white" htmlFor="confirmPassword">
+                  Confirme Sua Senha
+                </label>
+                <Input
+                  isRequired
+                  id="confirmPassword"
+                  errorMessage="Por favor, confirme sua senha"
+                  name="confirmPassword"
+                  placeholder="Confirme sua senha"
+                  type="password"
+                />
               </div>
 
               <div className="col-span-6">
@@ -75,7 +110,9 @@ function CreateAccount() {
               </div>
 
               <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                {/* <Button>Criar Conta</Button> */}
+                <Button color="primary" variant="shadow" size="lg" type="submit">
+                  Criar Conta
+                  </Button>
 
                 <p className="mt-4 text-sm sm:mt-0 text-gray-400">
                   Já tem uma conta?{" "}
