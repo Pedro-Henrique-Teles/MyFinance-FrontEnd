@@ -57,11 +57,11 @@ export default function Login() {
                 <div className="mt-2">
                   <Input
                     isRequired
-                    id="cpf"
-                    errorMessage="Por favor, preencha o campo CPF"
+                    id="password"
+                    errorMessage="Por favor, preencha o campo com a sua senha"
                     name="cpf"
-                    placeholder="Digite seu CPF"
-                    type="text"
+                    placeholder="Digite Sua Senha"
+                    type="password"
                   />
                 </div>
               </div>
