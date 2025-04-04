@@ -2,17 +2,20 @@ import { Button, Input } from "@heroui/react";
 import { useForm } from "react-hook-form";
 import { createUserSchema } from "../validation/createUserValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
-  
+import { useToast } from "../components/ui/useToast";
+
 function CreateAccount() {
   const {
     register,
     handleSubmit,
-    formState: { errors }, //pode ser usada para trazer o erro abaixo do input
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(createUserSchema),
   });
+  
+  const { showToast } = useToast();
 
-  const sendData = async (data) => {
+  const sendData = async (data, showToast) => {
     try {
       const response = await fetch(
         "http://localhost:3000/api/v1/myFinance/user/create",
@@ -25,20 +28,29 @@ function CreateAccount() {
         }
       );
       if (!response.ok) {
-        throw new Error("Erro na Requisição");
+        const errorData = await response.json()
+        throw new Error(errorData.message || "Erro na Requisição");
       }
       const result = await response.json();
       console.log("Sucesso", result);
-      alert("Dados enviados com sucesso!");
+      showToast({
+        title: "Sucesso",
+        description: "Dados enviados com sucesso!",
+        color: "success",
+      });
     } catch (error) {
       console.log("Erro: ", error);
-      alert("Houve um erro ao enviar os dados");
+      showToast({
+        title: "Erro",
+        description: error.message,
+        color: "danger",
+      });
     }
   };
 
   const onSubmit = (data) => {
     const { confirmPassword, ...dataToSend } = data;
-    sendData(dataToSend);
+    sendData(dataToSend, showToast);
     console.log(dataToSend);
   };
 
