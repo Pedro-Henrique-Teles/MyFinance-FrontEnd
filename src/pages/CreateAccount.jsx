@@ -1,8 +1,49 @@
 import { Button, Input } from "@heroui/react";
+import { useForm } from "react-hook-form";
+import { createUserSchema } from "../validation/createUserValidation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 function CreateAccount() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }, //pode ser usada para trazer o erro abaixo do input
+  } = useForm({
+    resolver: zodResolver(createUserSchema),
+  });
+
+  const sendData = async (data) => {
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/v1/myFinance/user/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Erro na Requisição");
+      }
+      const result = await response.json();
+      console.log("Sucesso", result);
+      alert("Dados enviados com sucesso!");
+    } catch (error) {
+      console.log("Erro: ", error);
+      alert("Houve um erro ao enviar os dados");
+    }
+  };
+
+  const onSubmit = (data) => {
+    const { confirmPassword, ...dataToSend } = data;
+    sendData(dataToSend);
+    console.log(dataToSend);
+  };
+
   return (
-    <section className="bg-gray-900">
+    <section className="bg-gray-900 h-screen">
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
         <div className="relative block h-16 lg:order-last  lg:col-span-5 lg:h-full xl:col-span-6">
           <img
@@ -23,19 +64,30 @@ function CreateAccount() {
               Simples, rápido e eficiente.
             </p>
 
-            <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="mt-8 grid grid-cols-6 gap-6"
+            >
               <div className="col-span-6 sm:col-span-3">
                 <label className="text-white mb-5" htmlFor="Nome">
                   Nome
                 </label>
                 <Input
-                  isRequired
+                  {...register("name")}
+                  className="bg-white rounded-lg"
+                  color={errors.name ? "danger" : "success"}
                   id="name"
-                  errorMessage="Por favor, preencha o campo Nome"
-                  name="name"
                   placeholder="Digite seu nome"
                   type="text"
+                  variant="bordered"
                 />
+                <span
+                  className={`text-sm italic ${
+                    errors.name ? "text-red-600" : "text-white"
+                  }`}
+                >
+                  {errors.name?.message}
+                </span>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -43,13 +95,22 @@ function CreateAccount() {
                   CPF
                 </label>
                 <Input
-                  isRequired
+                  {...register("cpf")}
+                  color={errors.cpf ? "danger" : "success"}
+                  className="bg-white rounded-lg"
                   id="cpf"
-                  errorMessage="Por favor, preencha o campo CPF"
                   name="cpf"
                   placeholder="Digite seu CPF"
                   type="text"
+                  variant="bordered"
                 />
+                <span
+                  className={`text-sm italic ${
+                    errors.cpf ? "text-red-600" : "text-white"
+                  }`}
+                >
+                  {errors.cpf?.message}
+                </span>
               </div>
 
               <div className="col-span-6">
@@ -57,13 +118,22 @@ function CreateAccount() {
                   Email
                 </label>
                 <Input
-                  isRequired
+                  {...register("email")}
+                  color={errors.email ? "danger" : "success"}
+                  className="bg-white rounded-lg"
                   id="email"
-                  errorMessage="Por favor, preencha o campo Email"
                   name="email"
                   placeholder="Digite seu email"
                   type="email"
+                  variant="bordered"
                 />
+                <span
+                  className={`text-sm italic ${
+                    errors.email ? "text-red-600" : "text-white"
+                  }`}
+                >
+                  {errors.email?.message}
+                </span>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -71,13 +141,22 @@ function CreateAccount() {
                   Senha
                 </label>
                 <Input
-                  isRequired
+                  {...register("password")}
+                  color={errors.password ? "danger" : "success"}
+                  className="bg-white rounded-lg"
                   id="password"
-                  errorMessage="Por favor, preencha o campo Senha"
                   name="password"
                   placeholder="Digite sua senha"
                   type="password"
+                  variant="bordered"
                 />
+                <span
+                  className={`text-sm italic ${
+                    errors.password ? "text-red-600" : "text-white"
+                  }`}
+                >
+                  {errors.password?.message}
+                </span>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -85,13 +164,22 @@ function CreateAccount() {
                   Confirme Sua Senha
                 </label>
                 <Input
-                  isRequired
+                  {...register("confirmPassword")}
+                  color={errors.confirmPassword ? "danger" : "success"}
+                  className="bg-white rounded-lg"
                   id="confirmPassword"
-                  errorMessage="Por favor, confirme sua senha"
                   name="confirmPassword"
                   placeholder="Confirme sua senha"
                   type="password"
+                  variant="bordered"
                 />
+                <span
+                  className={`text-sm italic ${
+                    errors.confirmPassword ? "text-red-600" : "text-white"
+                  }`}
+                >
+                  {errors.confirmPassword?.message}
+                </span>
               </div>
 
               <div className="col-span-6">
@@ -110,9 +198,14 @@ function CreateAccount() {
               </div>
 
               <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                <Button color="primary" variant="shadow" size="lg" type="submit">
+                <Button
+                  color="primary"
+                  variant="shadow"
+                  size="lg"
+                  type="submit"
+                >
                   Criar Conta
-                  </Button>
+                </Button>
 
                 <p className="mt-4 text-sm sm:mt-0 text-gray-400">
                   Já tem uma conta?{" "}

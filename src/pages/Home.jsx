@@ -1,7 +1,7 @@
 import { Button } from "@heroui/react";
 import { Link } from "react-router-dom";
-
 function Home() {
+
   return (
     <section className="flex items-center justify-center bg-gradient-to-r from-bgColorPrimary to-bgColorSecondary relative h-screen w-screen overflow-hidden">
       <div className="text-center z-10">
