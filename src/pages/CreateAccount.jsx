@@ -2,7 +2,7 @@ import { Button, Input } from "@heroui/react";
 import { useForm } from "react-hook-form";
 import { createUserSchema } from "../validation/createUserValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+  
 function CreateAccount() {
   const {
     register,
@@ -77,6 +77,7 @@ function CreateAccount() {
                   className="bg-white rounded-lg"
                   color={errors.name ? "danger" : "success"}
                   id="name"
+                  name="name"
                   placeholder="Digite seu nome"
                   type="text"
                   variant="bordered"
