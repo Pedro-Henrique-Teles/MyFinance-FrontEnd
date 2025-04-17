@@ -49,7 +49,7 @@ function CreateAccount() {
   };
 
   const onSubmit = (data) => {
-    const { confirmPassword, ...dataToSend } = data;
+    const { confirpmPassword, ...dataToSend } = data;
     sendData(dataToSend, showToast);
     console.log(dataToSend);
   };
